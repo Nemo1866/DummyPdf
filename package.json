@@ -1,0 +1,23 @@
+{
+  "name": "dummy-pdf",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "html-pdf": "^3.0.1",
+    "pdf-lib": "^1.17.1",
+    "pdfmake": "^0.2.7",
+    "puppeteer": "^19.7.5"
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-config-google": "^0.14.0"
+  }
+}
