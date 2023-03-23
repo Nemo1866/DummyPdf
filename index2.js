@@ -1,6 +1,9 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
 const path = require('path');
+const express=require("express")
+const app=express()
+const {Worker}=require("worker_threads")
 
 const generatePdf = async (template) => {
   try {
@@ -19,7 +22,8 @@ const generatePdf = async (template) => {
         right: '20px',
         bottom: '20px',
         left: '20px'
-      }
+      },
+      displayHeaderFooter:true
     });
     await browser.close();
     console.timeEnd("Generate Pdf")
@@ -28,4 +32,25 @@ const generatePdf = async (template) => {
   }
 }
 
-generatePdf(path.join(__dirname, './test.txt'));
+app.get("/",(req,res)=>{
+  res.send("Hello")
+})
+
+
+app.get("/heavy",async(req,res)=>{
+
+  await generatePdf(path.join(__dirname, './test.txt'));
+  res.status(200).json({msg:"Sucessfully Downloaded the pdf"})
+ 
+})
+
+app.get("/chinmay",(req,res)=>{
+ const worker=new Worker("./worker.js")
+ worker.on("message",(err,data)=>{
+
+   res.json({msg:data})
+ })
+})
+
+
+app.listen(3000,()=>console.log("Server is running on port 3000"))
